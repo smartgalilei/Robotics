@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TANEGASIMA — 次世代ロボティクスパートナー</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #060912;
+  --bg-secondary: #0b1020;
+  --bg-tertiary: #11182d;
+  --bg-card: rgba(15, 21, 40, 0.82);
+  --accent: #73a3ff;
+  --accent-strong: #3f7dff;
+  --accent-light: #9dc6ff;
+  --accent-bg: rgba(115,163,255,0.12);
+  --accent-border: rgba(115,163,255,0.25);
+  --text-primary: #f4f8ff;
+  --text-secondary: rgba(228,236,255,0.78);
+  --text-muted: rgba(176,190,224,0.62);
+  --border: rgba(142,164,214,0.22);
+  --border-light: rgba(142,164,214,0.14);
+  --highlight: #ffffff;
+  --grid-line: rgba(115,163,255,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 20px 45px rgba(0,0,0,0.28);
+  --shadow-lg: 0 28px 80px rgba(0,0,0,0.36);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Noto Sans JP', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1.2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(6,9,18,0.68);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.logo {
+  font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem;
+  letter-spacing: 0.3em; color: var(--highlight);
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.logo-mark {
+  width: 36px; height: 36px; border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: #fff; letter-spacing: 0;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent-light));
+  box-shadow: 0 0 30px rgba(115,163,255,0.35);
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: rgba(236,242,255,0.76); text-decoration: none; font-size: 0.82rem;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.3s; font-family: 'Space Mono', monospace;
+}
+.nav-links a:hover { color: var(--accent-light); }
+.nav-cta {
+  padding: 0.55rem 1.6rem; background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  color: #fff !important; font-weight: 700; border-radius: 999px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 0 24px rgba(115,163,255,0.18);
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(115,163,255,0.28); }
+
+/* HERO */
+.hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  padding: 8rem 4rem 4rem; z-index: 1; overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(115,163,255,0.2) 0%, transparent 32%),
+    radial-gradient(circle at 18% 82%, rgba(63,125,255,0.18) 0%, transparent 26%),
+    linear-gradient(180deg, #07101d 0%, #060912 100%);
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(115,163,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; inset: auto 0 0 0; height: 180px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.38));
+  pointer-events: none;
+}
+.hero-shell {
+  width: 100%; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(420px, 0.9fr);
+  gap: 3rem; align-items: center; position: relative; z-index: 2;
+}
+.hero-content { max-width: 720px; animation: fadeSlideUp 1s ease-out; }
+.hero-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  letter-spacing: 0.3em; color: var(--accent-light); margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.hero-tag::before { content: '//'; margin-right: 0.5rem; opacity: 0.4; }
+.hero h1 {
+  font-family: 'Orbitron', sans-serif; font-size: clamp(2.9rem, 6vw, 5.6rem);
+  font-weight: 900; line-height: 1.03; color: var(--highlight); margin-bottom: 1.4rem;
+  text-transform: uppercase;
+}
+.hero h1 .accent {
+  display: inline-block; color: transparent;
+  background: linear-gradient(135deg, #ffffff 0%, #a7c9ff 45%, #6ea1ff 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+.hero-desc {
+  font-size: 1.02rem; color: var(--text-secondary); max-width: 620px;
+  margin-bottom: 2rem; line-height: 1.9; font-weight: 300;
+}
+.hero-micro {
+  display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 1.8rem;
+}
+.hero-chip {
+  padding: 0.45rem 0.9rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.03); color: rgba(239,245,255,0.8);
+  font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em;
+}
+.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.95rem 2.2rem; background: linear-gradient(135deg, var(--accent-strong), var(--accent)); color: #fff;
+  text-decoration: none; font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 0.08em; border: none; cursor: pointer; transition: all 0.3s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  box-shadow: 0 12px 40px rgba(63,125,255,0.32);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 44px rgba(63,125,255,0.42); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.95rem 2.2rem; background: rgba(255,255,255,0.04); color: var(--text-primary);
+  text-decoration: none; font-weight: 500; font-size: 0.9rem;
+  letter-spacing: 0.08em; border: 1px solid rgba(255,255,255,0.14); cursor: pointer; transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent-light); background: rgba(115,163,255,0.06); }
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem; margin-top: 3.2rem;
+}
+.stat-item {
+  padding: 1.2rem 1.1rem; background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 18px;
+  backdrop-filter: blur(16px);
+}
+.stat-num { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-light); }
+.stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; letter-spacing: 0.05em; }
+.hero-visual {
+  position: relative; min-height: 640px; animation: fadeSlideUp 1s ease-out 0.1s both;
+}
+.hero-frame {
+  position: absolute; inset: 0 0 40px 0; overflow: hidden; border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+    radial-gradient(circle at 50% 20%, rgba(115,163,255,0.12), transparent 55%),
+    linear-gradient(180deg, rgba(11,16,32,0.98), rgba(7,10,20,0.98));
+  box-shadow: var(--shadow-lg);
+}
+.hero-frame::before {
+  content: ''; position: absolute; inset: 18px; border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.06); pointer-events: none;
+}
+.hero-media {
+  position: absolute; inset: 72px 40px 20px 40px; width: calc(100% - 80px); height: calc(100% - 92px);
+  object-fit: cover; object-position: center center; border-radius: 18px;
+  filter: drop-shadow(0 50px 80px rgba(0,0,0,0.56));
+}
+.hero-spec-card {
+  position: absolute; min-width: 180px; padding: 1rem 1.05rem;
+  border-radius: 18px; background: rgba(10,15,28,0.7);
+  border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.28);
+}
+.hero-spec-card strong {
+  display: block; font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--highlight);
+}
+.hero-spec-card span {
+  display: block; font-size: 0.72rem; color: var(--text-muted);
+  letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Space Mono', monospace;
+}
+.hero-spec-top { top: 62px; right: -14px; }
+.hero-spec-bottom { bottom: 0; left: -12px; }
+.hero-spec-bottom strong { color: var(--accent-light); }
+.hero-system-tag {
+  position: absolute; top: 24px; left: 24px;
+  padding: 0.48rem 0.8rem; border-radius: 999px;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: 'Space Mono', monospace; color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+}
+
+.signal-strip {
+  position: relative; z-index: 2; margin-top: -3rem; padding: 0 4rem 1rem;
+}
+.signal-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem; max-width: 1400px; margin: 0 auto;
+}
+.signal-card {
+  padding: 1.2rem 1.25rem; border-radius: 20px;
+  background: rgba(12,18,33,0.9); border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 18px 34px rgba(0,0,0,0.22); backdrop-filter: blur(18px);
+}
+.signal-label {
+  color: var(--text-muted); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; font-family: 'Space Mono', monospace; margin-bottom: 0.5rem;
+}
+.signal-value {
+  color: var(--highlight); font-family: 'Orbitron', sans-serif; font-size: 1.45rem; line-height: 1.1;
+}
+.signal-note { margin-top: 0.45rem; color: var(--text-secondary); font-size: 0.82rem; }
+
+/* SECTIONS */
+section { position: relative; z-index: 1; padding: 7rem 4rem; }
+.section-tag {
+  font-family: 'Space Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.35em; color: var(--accent-light); text-transform: uppercase; margin-bottom: 1rem;
+}
+.section-tag::before { content: '[ '; opacity: 0.4; }
+.section-tag::after { content: ' ]'; opacity: 0.4; }
+.section-title {
+  font-family: 'Orbitron', sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700; color: var(--highlight); margin-bottom: 1rem;
+}
+.section-desc { color: var(--text-secondary); max-width: 600px; font-size: 0.95rem; line-height: 1.8; font-weight: 300; }
+
+/* PRODUCTS */
+#products {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(115,163,255,0.08), transparent 24%),
+    linear-gradient(180deg, #060912 0%, #0a1020 100%);
+}
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3.5rem; }
+.product-card {
+  background: linear-gradient(180deg, rgba(18,26,48,0.92), rgba(12,18,33,0.88));
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative; border-radius: 24px; box-shadow: var(--shadow-sm);
+}
+.product-card:hover { border-color: var(--accent-border); transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+.product-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0); transition: transform 0.4s; border-radius: 24px 24px 0 0;
+}
+.product-card:hover::after { transform: scaleX(1); }
+
+.product-visual {
+  height: 320px;
+  position: relative; overflow: hidden;
+}
+.product-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9,13,24,0.1) 0%, rgba(9,13,24,0) 30%, rgba(9,13,24,0.34) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(115,163,255,0.018) 2px, rgba(115,163,255,0.018) 4px);
+  z-index: 1;
+}
+.product-visual::after {
+  content: ''; position: absolute; inset: auto auto -34px -20px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(115,163,255,0.14) 0%, rgba(115,163,255,0.05) 36%, transparent 72%);
+  filter: blur(14px); pointer-events: none; z-index: 1;
+}
+.product-photo {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: saturate(1.03) contrast(1.05);
+}
+.product-photo.enterprise { object-position: center 12%; }
+.product-photo.research { object-position: center 16%; }
+.product-photo.industrial { object-position: center 24%; }
+.product-photo.agile { object-position: center 24%; }
+
+.product-badge {
+  position: absolute; top: 1rem; right: 1rem;
+  font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
+  color: var(--accent-light); background: rgba(9,13,24,0.52);
+  padding: 0.35rem 0.8rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 999px;
+  z-index: 2; backdrop-filter: blur(12px);
+}
+.product-info { padding: 1.6rem 1.8rem 1.9rem; }
+.product-name { font-family: 'Orbitron', sans-serif; font-size: 1.12rem; font-weight: 700; color: var(--highlight); margin-bottom: 0.3rem; }
+.product-sub { font-size: 0.78rem; color: var(--text-muted); font-family: 'Space Mono', monospace; margin-bottom: 1rem; letter-spacing: 0.05em; }
+.product-specs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+.spec-tag {
+  font-size: 0.7rem; padding: 0.34rem 0.7rem; background: rgba(115,163,255,0.1);
+  border: 1px solid rgba(115,163,255,0.18); color: var(--accent-light); border-radius: 999px; font-weight: 500;
+}
+.product-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+.product-link {
+  display: inline-flex; align-items: center; margin-top: 1.2rem;
+  color: var(--accent-light); text-decoration: none; font-size: 0.82rem;
+  font-family: 'Space Mono', monospace; letter-spacing: 0.08em;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.product-link:hover { transform: translateX(4px); color: #fff; }
+
+/* STRENGTHS */
+#strengths { background: linear-gradient(180deg, #0b1020 0%, #0d1325 100%); }
+.strength-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+.strength-card {
+  padding: 2.5rem 2rem; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s; border-radius: 24px;
+  backdrop-filter: blur(12px);
+}
+.strength-card:hover { border-color: var(--accent-border); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.strength-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; color: var(--accent-light); }
+.strength-card h3 { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--highlight); margin-bottom: 0.8rem; }
+.strength-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+
+/* USE CASES */
+#usecases { background: linear-gradient(180deg, #08111e 0%, #060912 100%); }
+.usecase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.usecase-item {
+  display: flex; gap: 1.5rem; padding: 2rem; background: rgba(15,21,40,0.74);
+  border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s;
+  align-items: flex-start; border-radius: 22px; box-shadow: var(--shadow-sm);
+}
+.usecase-item:hover { border-color: var(--accent-border); transform: translateX(4px); box-shadow: var(--shadow-md); }
+.usecase-num { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: rgba(115,163,255,0.28); line-height: 1; min-width: 3rem; }
+.usecase-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--highlight); margin-bottom: 0.5rem; }
+.usecase-item p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+/* PROCESS */
+#process { background: linear-gradient(180deg, #0b1020 0%, #0a0f1d 100%); }
+.process-timeline { margin-top: 3.5rem; display: flex; position: relative; }
+.process-timeline::before {
+  content: ''; position: absolute; top: 36px; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(115,163,255,0.4), transparent);
+}
+.process-step { flex: 1; position: relative; padding-top: 4.5rem; padding-right: 2rem; }
+.process-step::before {
+  content: ''; position: absolute; top: 28px; left: 0; width: 16px; height: 16px;
+  background: var(--bg-secondary); border: 2px solid var(--accent-light); border-radius: 50%; z-index: 1;
+  box-shadow: 0 0 18px rgba(115,163,255,0.35);
+}
+.step-num { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent-light); letter-spacing: 0.2em; margin-bottom: 0.7rem; }
+.process-step h4 { font-size: 0.95rem; font-weight: 700; color: var(--highlight); margin-bottom: 0.5rem; }
+.process-step p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+/* CTA */
+.cta-section {
+  text-align: center; padding: 8rem 4rem; position: relative; overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(115,163,255,0.14), transparent 36%),
+    linear-gradient(180deg, #07101d 0%, #060912 100%);
+}
+.cta-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(115,163,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-section .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1.2rem; }
+.cta-section .section-desc { margin: 0 auto 2.5rem; text-align: center; }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1; padding: 3rem 4rem; border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: space-between; align-items: center; background: #060912;
+}
+.footer-brand { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.2em; color: var(--text-muted); }
+.footer-info { font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 2rem; }
+.footer-info a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+.footer-info a:hover { color: var(--accent-light); }
+
+/* ANIMATIONS */
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero-shell { grid-template-columns: 1fr; }
+  .hero-visual { min-height: 560px; }
+  .signal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .strength-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-timeline { flex-direction: column; gap: 2rem; }
+  .process-timeline::before { display: none; }
+  .process-step { padding-top: 0; padding-left: 3rem; padding-right: 0; }
+  .process-step::before { top: 2px; left: 0; }
+}
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section, .hero { padding: 4rem 1.5rem; }
+  .hero { padding-top: 7rem; }
+  .hero-shell { gap: 2rem; }
+  .hero h1 { font-size: clamp(2.5rem, 13vw, 4rem); }
+  .hero-visual { min-height: 460px; }
+  .hero-frame { inset: 0; }
+  .hero-media { inset: 76px 18px 18px 18px; width: calc(100% - 36px); height: calc(100% - 94px); }
+  .hero-spec-card { min-width: 150px; padding: 0.9rem; }
+  .hero-spec-top { top: 70px; right: 10px; }
+  .hero-spec-bottom { left: 10px; bottom: 10px; }
+  .hero-stats { grid-template-columns: 1fr; gap: 1rem; }
+  .signal-strip { padding: 0 1.5rem 1rem; margin-top: -1.5rem; }
+  .signal-grid { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr; }
+  .strength-grid { grid-template-columns: 1fr; }
+  .usecase-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .footer-info { flex-direction: column; gap: 0.5rem; }
+}
+
+.kanji-float {
+  position: absolute; font-size: 12rem; font-weight: 900;
+  color: rgba(115,163,255,0.05); pointer-events: none;
+  font-family: 'Noto Sans JP', sans-serif; z-index: 0; user-select: none;
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="logo"><div class="logo-mark">TG</div>TANEGASIMA</div>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#strengths">Strengths</a></li>
+    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <span class="kanji-float" style="top: 10%; right: 5%;">種</span>
+  <div class="hero-shell">
+    <div class="hero-content">
+      <div class="hero-tag">Next-Generation Robotics Partner</div>
+      <h1>Embodied AI,<br><span class="accent">Ready For Reality.</span></h1>
+      <p class="hero-desc">TANEGASIMAは、最先端の人形ロボット・四足歩行ロボットを核に、一流のハードウェアとお客様独自のユースケースに最適化されたソフトウェアを融合するトータルソリューションプロバイダーとして、現場で即戦力となるロボティクスソリューションをご提供します。</p>
+      <div class="hero-micro">
+        <span class="hero-chip">HUMANOID / QUADRUPED</span>
+        <span class="hero-chip">SDK OPEN PLATFORM</span>
+        <span class="hero-chip">JAPAN MARKET SUPPORT</span>
+      </div>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">導入相談 →</a>
+        <a href="#products" class="btn-secondary">製品ラインナップ</a>
+      </div>
+      <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">ロボットラインナップ</div></div>
+        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">カスタマイズ対応</div></div>
+        <div class="stat-item"><div class="stat-num">SDK</div><div class="stat-label">オープンプラットフォーム</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-frame">
+        <div class="hero-system-tag">Tanegasima // Enterprise Platform</div>
+        <video class="hero-media" autoplay muted loop playsinline preload="metadata" poster="assets/tanegasima/hero-video/shot-01.png" aria-label="TANEGASIMA collaborative robotics hero video">
+          <source src="assets/tanegasima/hero-video/tanegasima-hero-collab-v2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero-spec-card hero-spec-top">
+        <span>Core Platform</span>
+        <strong>23 DOF</strong>
+        <span>Enterprise Humanoid</span>
+      </div>
+      <div class="hero-spec-card hero-spec-bottom">
+        <span>Integration Layer</span>
+        <strong>AI + SDK + API</strong>
+        <span>From PoC to Deployment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="signal-strip" aria-label="platform signals">
+  <div class="signal-grid">
+    <div class="signal-card">
+      <div class="signal-label">Robotics Stack</div>
+      <div class="signal-value">Hardware + Software</div>
+      <div class="signal-note">現場要件に合わせて統合設計</div>
+    </div>
+    <div class="signal-card">
+      <div class="signal-label">Developer Access</div>
+      <div class="signal-value">ROS2 / Python / API</div>
+      <div class="signal-note">二次開発しやすい開放型構成</div>
+    </div>
+    <div class="signal-card">
+      <div class="signal-label">Deployment Mode</div>
+      <div class="signal-value">PoC to Scale</div>
+      <div class="signal-note">検証から量産導入まで一気通貫</div>
+    </div>
+    <div class="signal-card">
+      <div class="signal-label">Support Window</div>
+      <div class="signal-value">Japan Local Support</div>
+      <div class="signal-note">導入・保守・技術連携を日本語で対応</div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="section-tag">Product Lineup</div>
+  <h2 class="section-title">製品ラインナップ</h2>
+  <p class="section-desc">研究開発から産業用途まで、あらゆるニーズに対応する多彩なロボットをご用意。すべてのモデルでSDK・APIを完全公開し、お客様の二次開発を全面サポートします。</p>
+  <div class="products-grid">
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">HUMANOID</div>
+        <img class="product-photo enterprise" src="assets/tanegasima/generated/humanoid-enterprise-v2.png" alt="HUMANOID ENTERPRISE robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">HUMANOID ENTERPRISE</div>
+        <div class="product-sub">汎用人形ロボット ー 産業グレード</div>
+        <div class="product-specs"><span class="spec-tag">170cm / 65kg</span><span class="spec-tag">23 DOF</span><span class="spec-tag">歩行・作業</span><span class="spec-tag">AI搭載</span></div>
+        <p class="product-desc">工場・倉庫・接客など多様な現場に対応する汎用人形ロボット。高精度マニピュレーションと自律歩行を両立。</p>
+        <a class="product-link" href="tanegasima-humanoid-enterprise.html">製品詳細を見る →</a>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">HUMANOID</div>
+        <img class="product-photo research" src="assets/tanegasima/generated/humanoid-research-v2.png" alt="HUMANOID RESEARCH robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">HUMANOID RESEARCH</div>
+        <div class="product-sub">研究開発用 小型人形ロボット</div>
+        <div class="product-specs"><span class="spec-tag">130cm / 35kg</span><span class="spec-tag">19 DOF</span><span class="spec-tag">ROS2対応</span><span class="spec-tag">SDK完全公開</span></div>
+        <p class="product-desc">大学・研究機関向け。ROS2完全対応のオープンアーキテクチャで、AIモデルの検証から歩行アルゴリズム開発まで。</p>
+        <a class="product-link" href="tanegasima-humanoid-research.html">製品詳細を見る →</a>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">QUADRUPED</div>
+        <img class="product-photo industrial" src="assets/tanegasima/generated/quadruped-industrial-v2.png" alt="QUADRUPED INDUSTRIAL robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">QUADRUPED INDUSTRIAL</div>
+        <div class="product-sub">産業用 四足歩行ロボット</div>
+        <div class="product-specs"><span class="spec-tag">60kg</span><span class="spec-tag">IP67防水</span><span class="spec-tag">LiDAR搭載</span><span class="spec-tag">自律巡回</span></div>
+        <p class="product-desc">プラント巡回点検、建設現場の3Dマッピング、屋外セキュリティ。過酷な環境で安定動作する産業グレード四足ロボット。</p>
+        <a class="product-link" href="tanegasima-quadruped-industrial.html">製品詳細を見る →</a>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">QUADRUPED</div>
+        <img class="product-photo agile" src="assets/tanegasima/generated/quadruped-agile-v2.png" alt="QUADRUPED AGILE robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">QUADRUPED AGILE</div>
+        <div class="product-sub">高機動 小型ロボットドッグ</div>
+        <div class="product-specs"><span class="spec-tag">15kg</span><span class="spec-tag">Python SDK</span><span class="spec-tag">教育向け</span><span class="spec-tag">カスタム可</span></div>
+        <p class="product-desc">教育機関・エンターテインメント・研究開発に最適な小型四足ロボット。Python SDKで直感的にプログラミング可能。</p>
+        <a class="product-link" href="tanegasima-quadruped-agile.html">製品詳細を見る →</a>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">SERVICE HUMANOID</div>
+        <img class="product-photo industrial" src="assets/tanegasima/generated/mobile-manipulator-v4.png" alt="SERVICE HUMANOID ASSIST robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">SERVICE HUMANOID ASSIST</div>
+        <div class="product-sub">輪式ベース 人形上半身サービスロボット</div>
+        <div class="product-specs"><span class="spec-tag">Chest Display</span><span class="spec-tag">案内・受付</span><span class="spec-tag">講義支援</span><span class="spec-tag">館内移動</span></div>
+        <p class="product-desc">輪式下盤と人形上半身を組み合わせたサービスロボット。受付、施設案内、ショールーム説明、教室での講義支援に最適。</p>
+        <a class="product-link" href="tanegasima-mobile-manipulator.html">製品詳細を見る →</a>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-visual">
+        <div class="product-badge">TRACKED INSPECTION</div>
+        <img class="product-photo industrial" src="assets/tanegasima/generated/tracked-response-v2.png" alt="TRACKED RESPONSE X robot photo">
+      </div>
+      <div class="product-info">
+        <div class="product-name">TRACKED RESPONSE X</div>
+        <div class="product-sub">履帯型 危険区域点検ロボット</div>
+        <div class="product-specs"><span class="spec-tag">履帯走行</span><span class="spec-tag">狭所対応</span><span class="spec-tag">遠隔点検</span><span class="spec-tag">初動投入</span></div>
+        <p class="product-desc">地下設備、トンネル、災害現場のような危険区域向け。低重心履帯シャーシで先行点検と状況把握を支援。</p>
+        <a class="product-link" href="tanegasima-tracked-response.html">製品詳細を見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="strengths">
+  <span class="kanji-float" style="bottom: 10%; left: -3%;">力</span>
+  <div class="section-tag">Core Strengths</div>
+  <h2 class="section-title">TANEGASIMAの強み</h2>
+  <p class="section-desc">ハードウェアの性能だけでは終わらない。現場で「使える」ロボットに仕上げるのが私たちの仕事です。</p>
+  <div class="strength-grid">
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M14 22l6 6 14-14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <h3>一流ハードウェア</h3>
+      <p>世界トップクラスのロボットメーカーと正規提携。高い耐久性、精度、安全性を備えた機体を日本市場に安定供給します。部品供給・メンテナンス体制も万全。</p>
+    </div>
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><path d="M8 16l16-8 16 8v16l-16 8-16-8V16z" stroke="currentColor" stroke-width="1.5"/><path d="M8 16l16 8 16-8M24 24v16" stroke="currentColor" stroke-width="1.5"/></svg>
+      <h3>オープンプラットフォーム</h3>
+      <p>ROS2・Python SDK・REST APIを完全公開。お客様のエンジニアが自由にアプリケーション開発可能。豊富なサンプルコードとドキュメントを日本語でご提供。</p>
+    </div>
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="1.5"/><path d="M24 14v10l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor" opacity="0.3"/></svg>
+      <h3>シーン別カスタマイズ</h3>
+      <p>「工場の巡回点検」「展示会の案内」「研究室の実験」—— お客様のユースケースに合わせて、ソフトウェアからハードウェアアタッチメントまで、最適な構成をご提案・開発します。</p>
+    </div>
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><path d="M12 36V20l12-8 12 8v16" stroke="currentColor" stroke-width="1.5"/><rect x="19" y="26" width="10" height="10" stroke="currentColor" stroke-width="1.5"/><path d="M24 12v-4M18 14l-3-3M30 14l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <h3>日本語サポート</h3>
+      <p>導入コンサルティングからPoC支援、量産導入、アフターサービスまで、すべて日本語で完結。海外メーカーとの技術的なやり取りも当社が代行します。</p>
+    </div>
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="28" y="10" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="17" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><line x1="13" y1="24" x2="24" y2="26" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/><line x1="35" y1="24" x2="24" y2="26" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/></svg>
+      <h3>AIインテグレーション</h3>
+      <p>大規模言語モデル・画像認識・音声対話AIとロボットの統合を支援。自然言語での指示操作やリアルタイム環境認識など、次世代の知能ロボットを実現。</p>
+    </div>
+    <div class="strength-card fade-in">
+      <svg class="strength-icon" viewBox="0 0 48 48" fill="none"><path d="M8 38l8-12 8 6 8-16 8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="38" r="2" fill="currentColor" opacity="0.4"/><circle cx="16" cy="26" r="2" fill="currentColor" opacity="0.4"/><circle cx="24" cy="32" r="2" fill="currentColor" opacity="0.4"/><circle cx="32" cy="16" r="2" fill="currentColor" opacity="0.4"/><circle cx="40" cy="26" r="2" fill="currentColor" opacity="0.4"/></svg>
+      <h3>スケーラブル導入</h3>
+      <p>1台のPoC導入から数十台規模の量産展開まで、段階的な導入計画を策定。ROI検証を重視し、失敗リスクを最小化するアプローチをご提案します。</p>
+    </div>
+  </div>
+</section>
+
+<section id="usecases">
+  <div class="section-tag">Use Cases</div>
+  <h2 class="section-title">導入シーン</h2>
+  <p class="section-desc">TANEGASIMAのロボットは、様々な現場で活躍しています。お客様の課題に合わせた最適な構成をご提案。</p>
+  <div class="usecase-grid">
+    <div class="usecase-item fade-in"><div class="usecase-num">01</div><div><h4>プラント巡回点検</h4><p>四足ロボットが24時間体制でプラント内を自律巡回。温度・振動・異音をAIが即時解析し、異常を早期発見。危険区域への人員派遣を大幅削減。</p></div></div>
+    <div class="usecase-item fade-in"><div class="usecase-num">02</div><div><h4>建設現場 3Dマッピング</h4><p>LiDAR搭載四足ロボットが複雑な地形を走破しながら高精度な3D点群データを取得。施工進捗管理と品質検査を自動化。</p></div></div>
+    <div class="usecase-item fade-in"><div class="usecase-num">03</div><div><h4>展示会・商業施設 案内</h4><p>人形ロボットが多言語対応の案内・接客を実施。来訪者との自然な対話と施設案内を実現し、スタッフの負担を軽減。</p></div></div>
+    <div class="usecase-item fade-in"><div class="usecase-num">04</div><div><h4>倉庫・工場内搬送</h4><p>人形ロボットが人間と同じ動線で棚から部品をピッキング・搬送。既存のレイアウトを変更せずに自動化を実現。</p></div></div>
+    <div class="usecase-item fade-in"><div class="usecase-num">05</div><div><h4>研究開発・教育</h4><p>大学・高専の研究室にSDK完全公開のロボットを導入。強化学習、SLAM、自然言語インタラクション等のAI研究基盤に。</p></div></div>
+    <div class="usecase-item fade-in"><div class="usecase-num">06</div><div><h4>セキュリティ・監視</h4><p>四足ロボットが広大な敷地を自律パトロール。侵入検知・映像記録・リアルタイムアラートをワンパッケージで提供。</p></div></div>
+  </div>
+</section>
+
+<section id="process">
+  <span class="kanji-float" style="top: 5%; right: 2%;">道</span>
+  <div class="section-tag">How We Work</div>
+  <h2 class="section-title">導入プロセス</h2>
+  <p class="section-desc">ヒアリングから導入後のサポートまで、ワンストップで対応します。</p>
+  <div class="process-timeline">
+    <div class="process-step fade-in"><div class="step-num">STEP 01</div><h4>ヒアリング</h4><p>現場の課題・導入目的・運用イメージを詳しくお伺いし、最適なロボットと構成をご提案。</p></div>
+    <div class="process-step fade-in"><div class="step-num">STEP 02</div><h4>PoC / デモ</h4><p>実機デモまたは小規模PoCで実際の現場での動作を検証。ROIと運用フローを具体的に確認。</p></div>
+    <div class="process-step fade-in"><div class="step-num">STEP 03</div><h4>カスタマイズ開発</h4><p>お客様のユースケースに合わせたソフトウェア開発・ハードウェアアタッチメント設計を実施。</p></div>
+    <div class="process-step fade-in"><div class="step-num">STEP 04</div><h4>導入・運用サポート</h4><p>現場への設置・初期設定・オペレーター研修。導入後も定期メンテナンスと技術サポートを継続。</p></div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="section-tag">Contact</div>
+  <h2 class="section-title">まずは、お気軽にご相談ください</h2>
+  <p class="section-desc">「こんな現場でロボットを使いたい」—— その一言から始まります。<br>専任コンサルタントが、貴社の課題に最適なロボティクスソリューションをご提案します。</p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <a href="mailto:info@tanegasima.co.jp" class="btn-primary">メールでお問い合わせ →</a>
+    <a href="tel:+81-3-XXXX-XXXX" class="btn-secondary">☎ 電話相談</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">TANEGASIMA ROBOTICS</div>
+  <div class="footer-info">
+    <span>© 2026 TANEGASIMA. All rights reserved.</span>
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">特定商取引法に基づく表記</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.kanji-float').forEach(el => {
+    el.style.transform = `translateY(${window.scrollY * 0.03}px)`;
+  });
+});
+</script>
+</body>
+</html>

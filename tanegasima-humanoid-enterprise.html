@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUMANOID ENTERPRISE | TANEGASIMA</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tanegasima/product-detail.css">
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="page-shell">
+  <header class="topbar">
+    <a class="brand" href="Tanegasima.html"><span class="brand-mark">TG</span>TANEGASIMA</a>
+    <div class="top-actions">
+      <a class="action-link-outline" href="Tanegasima.html#products">製品一覧へ戻る</a>
+      <a class="action-link" href="Tanegasima.html#contact">導入相談</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Enterprise Humanoid Platform</div>
+        <h1 class="title">Humanoid<span>Enterprise</span></h1>
+        <p class="subtitle">工場・倉庫・接客フロアをまたぐ現場実装を想定した産業グレード人形ロボット。歩行、把持、搬送、案内を一体化し、AIアプリケーションを実運用へ接続するための主力プラットフォームです。</p>
+        <div class="chip-row">
+          <span class="chip">23 DOF</span>
+          <span class="chip">170cm / 65kg</span>
+          <span class="chip">Manipulator Ready</span>
+          <span class="chip">AI + SDK + API</span>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>8h</strong><span>想定連続稼働</span></div>
+          <div class="stat"><strong>±2cm</strong><span>高精度タスク位置決め</span></div>
+          <div class="stat"><strong>ROS2</strong><span>外部システムと連携</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-panel">
+          <div class="hero-label">Tanegasima // Flagship Humanoid</div>
+          <img class="hero-image" src="assets/tanegasima/generated/humanoid-enterprise-v2.png" alt="HUMANOID ENTERPRISE">
+        </div>
+        <div class="hero-float-card float-top"><span>Payload Mode</span><strong>Dual-arm Tasks</strong><span>搬送 / ピッキング / 案内</span></div>
+        <div class="hero-float-card float-bottom"><span>Integration</span><strong>WMS / MES / VLM</strong><span>既存システムへ接続</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Technical Overview</div>
+        <h2 class="section-title">想定スペック</h2>
+      </div>
+      <p class="section-copy">量産導入やPoC提案時に使えるレベルの大まかな指標として整理しています。実案件ではエンドエフェクタ、バッテリー構成、センサーパッケージに応じて最適化可能です。</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card"><small>Body Size</small><strong>170 cm / 65 kg</strong><p>人間動線への適応と安定歩行の両立を狙った標準サイズ。</p></div>
+      <div class="spec-card"><small>Degrees of Freedom</small><strong>23 DOF</strong><p>歩行と上半身作業を両立する多自由度構成。</p></div>
+      <div class="spec-card"><small>Sensing</small><strong>RGB-D / LiDAR / Force</strong><p>環境認識、障害物回避、把持制御向け複合センサー。</p></div>
+      <div class="spec-card"><small>Software Stack</small><strong>ROS2 / Python SDK</strong><p>現場連携、二次開発、AIオーケストレーションに対応。</p></div>
+    </div>
+    <div class="feature-list">
+      <div class="feature"><strong>現場適応マニピュレーション</strong><p>箱搬送、棚前作業、台車連携などを想定し、視覚と把持制御を統合。</p></div>
+      <div class="feature"><strong>人間空間での移動</strong><p>工場通路やバックヤードなど既存レイアウトを崩さず導入しやすい設計。</p></div>
+      <div class="feature"><strong>アプリケーション層拡張</strong><p>音声、VLM、業務システム連携まで含めて上位ソフトを実装可能。</p></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Use Case</div>
+        <h2 class="section-title">倉庫・工場での人協働運用</h2>
+      </div>
+    </div>
+    <div class="scenario">
+      <img class="scenario-media" src="assets/tanegasima/usecases/humanoid-enterprise-scene.png" alt="warehouse use case">
+      <div class="scenario-content">
+        <h3>既存動線のまま、作業と搬送を自動化</h3>
+        <p>HUMANOID ENTERPRISE は、人向けに設計された空間へそのまま入れることが最大の強みです。棚前でのピッキング、容器の受け渡し、案内や接客タスクを一つの機体上で統合できます。</p>
+        <div class="scenario-points">
+          <span>Warehouse Picking</span>
+          <span>Front-desk Guidance</span>
+          <span>Container Handling</span>
+          <span>Night Shift Automation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-head">
+      <div>
+        <div class="section-tag">Deployment Flow</div>
+        <h2 class="section-title">導入イメージ</h2>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step"><small>Step 01</small><strong>現場ヒアリング</strong><p>タスク定義、作業時間、導線、安全要求を洗い出して適用範囲を整理。</p></div>
+      <div class="timeline-step"><small>Step 02</small><strong>PoC 検証</strong><p>代表タスクを実機で検証し、把持や歩行の成功率を業務KPIと紐付け。</p></div>
+      <div class="timeline-step"><small>Step 03</small><strong>業務実装</strong><p>WMS / MES / 監視系と接続し、実運用フローへ組み込む。</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">© 2026 TANEGASIMA ROBOTICS</footer>
+</div>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.14 });
+document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+const scenario = document.querySelector('.scenario');
+const onScroll = () => {
+  if (!scenario) return;
+  const rect = scenario.getBoundingClientRect();
+  scenario.style.setProperty('--scroll-shift', `${Math.max(-160, Math.min(160, rect.top - window.innerHeight / 2))}px`);
+};
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+</body>
+</html>

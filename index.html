@@ -108,7 +108,7 @@ nav {
 }
 .hero-shell {
   width: 100%; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(420px, 0.9fr);
-  gap: 3rem; align-items: center; position: relative; z-index: 2;
+  gap: 3rem; align-items: start; position: relative; z-index: 2;
 }
 .hero-content { max-width: 720px; animation: fadeSlideUp 1s ease-out; }
 .hero-tag {
@@ -117,7 +117,7 @@ nav {
 }
 .hero-tag::before { content: '//'; margin-right: 0.5rem; opacity: 0.4; }
 .hero h1 {
-  font-family: 'Orbitron', sans-serif; font-size: clamp(2.9rem, 6vw, 5.6rem);
+  font-family: 'Orbitron', sans-serif; font-size: clamp(2.45rem, 5vw, 4.65rem);
   font-weight: 900; line-height: 1.03; color: var(--highlight); margin-bottom: 1.4rem;
   text-transform: uppercase;
 }
@@ -127,8 +127,15 @@ nav {
   -webkit-background-clip: text; background-clip: text;
 }
 .hero-desc {
-  font-size: 1.02rem; color: var(--text-secondary); max-width: 620px;
-  margin-bottom: 2rem; line-height: 1.9; font-weight: 300;
+  font-size: 1.08rem; color: rgba(244,248,255,0.92); max-width: 680px;
+  margin-bottom: 2rem; line-height: 1.95; font-weight: 400;
+  padding: 1.2rem 1.35rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+  border: 1px solid rgba(157,198,255,0.18);
+  border-left: 4px solid var(--accent-light);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.18);
+  text-wrap: balance;
 }
 .hero-micro {
   display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 1.8rem;
@@ -411,7 +418,7 @@ footer {
   section, .hero { padding: 4rem 1.5rem; }
   .hero { padding-top: 7rem; }
   .hero-shell { gap: 2rem; }
-  .hero h1 { font-size: clamp(2.5rem, 13vw, 4rem); }
+  .hero h1 { font-size: clamp(2.15rem, 10vw, 3.3rem); }
   .hero-visual { min-height: 460px; }
   .hero-frame { inset: 0; }
   .hero-media { inset: 76px 18px 18px 18px; width: calc(100% - 36px); height: calc(100% - 94px); }
@@ -454,8 +461,7 @@ footer {
   <span class="kanji-float" style="top: 10%; right: 5%;">種</span>
   <div class="hero-shell">
     <div class="hero-content">
-      <div class="hero-tag">Next-Generation Robotics Partner</div>
-      <h1>Embodied AI,<br><span class="accent">Ready For Reality.</span></h1>
+      <h1><span class="accent">NEXT-GENERATION</span><br>ROBOTICS PARTNER</h1>
       <p class="hero-desc">TANEGASIMAは、最先端の人形ロボット・四足歩行ロボットを核に、一流のハードウェアとお客様独自のユースケースに最適化されたソフトウェアを融合するトータルソリューションプロバイダーとして、現場で即戦力となるロボティクスソリューションをご提供します。</p>
       <div class="hero-micro">
         <span class="hero-chip">HUMANOID / QUADRUPED</span>

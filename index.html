@@ -395,6 +395,17 @@ section { position: relative; z-index: 1; padding: 7rem 4rem; }
 }
 .cta-section .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1.2rem; }
 .cta-section .section-desc { margin: 0 auto 2.5rem; text-align: center; }
+.contact-card {
+  max-width: 620px; margin: 0 auto;
+  padding: 2rem 2.2rem; text-align: left;
+  border-radius: 24px; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 44px rgba(0,0,0,0.2);
+  backdrop-filter: blur(14px);
+}
+.contact-card p {
+  color: var(--text-primary); font-size: 1rem; line-height: 1.95;
+}
 
 /* FOOTER */
 footer {
@@ -695,9 +706,8 @@ footer {
   <div class="section-tag">Contact</div>
   <h2 class="section-title">まずは、お気軽にご相談ください</h2>
   <p class="section-desc">「こんな現場でロボットを使いたい」—— その一言から始まります。<br>専任コンサルタントが、貴社の課題に最適なロボティクスソリューションをご提案します。</p>
-  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-    <a href="mailto:info@tanegasima.co.jp" class="btn-primary">メールでお問い合わせ →</a>
-    <a href="tel:+81-3-XXXX-XXXX" class="btn-secondary">☎ 電話相談</a>
+  <div class="contact-card">
+    <p>株式会社TANEGASIMA<br>Email：support@tanegasima.com<br>Tel: 03-4500-9985</p>
   </div>
 </section>
 
@@ -705,8 +715,7 @@ footer {
   <div class="footer-brand">TANEGASIMA ROBOTICS</div>
   <div class="footer-info">
     <span>© 2026 TANEGASIMA. All rights reserved.</span>
-    <a href="#">プライバシーポリシー</a>
-    <a href="#">特定商取引法に基づく表記</a>
+    <a href="privacy.html">プライバシーポリシー</a>
   </div>
 </footer>
 

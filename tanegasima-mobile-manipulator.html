@@ -27,21 +27,36 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "SERVICE HUMANOID ASSIST",
-  "description": "輪式ベースと人形上半身を組み合わせた、受付・案内・講義支援向けサービスロボット。",
-  "brand": {
-    "@type": "Brand",
-    "name": "TANEGASIMA"
-  },
-  "category": "Service Humanoid Robot",
-  "url": "https://tanegasima.com/tanegasima-mobile-manipulator.html",
-  "image": "https://tanegasima.com/assets/tanegasima/generated/mobile-manipulator-v4.png",
-  "manufacturer": {
-    "@type": "Organization",
-    "name": "株式会社TANEGASIMA",
-    "url": "https://tanegasima.com/"
-  }
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://tanegasima.com/tanegasima-mobile-manipulator.html#webpage",
+      "url": "https://tanegasima.com/tanegasima-mobile-manipulator.html",
+      "name": "SERVICE HUMANOID ASSIST | TANEGASIMA",
+      "description": "輪式ベースと人形上半身を組み合わせた、受付・案内・講義支援向けサービスロボット。",
+      "inLanguage": "ja-JP",
+      "primaryImageOfPage": "https://tanegasima.com/assets/tanegasima/generated/mobile-manipulator-v4.png"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://tanegasima.com/tanegasima-mobile-manipulator.html#service",
+      "name": "SERVICE HUMANOID ASSIST",
+      "description": "輪式ベースと人形上半身を組み合わせた、受付・案内・講義支援向けサービスロボット。",
+      "serviceType": "Service humanoid robotics platform",
+      "url": "https://tanegasima.com/tanegasima-mobile-manipulator.html",
+      "image": "https://tanegasima.com/assets/tanegasima/generated/mobile-manipulator-v4.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "TANEGASIMA"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "株式会社TANEGASIMA",
+        "url": "https://tanegasima.com/"
+      },
+      "areaServed": "JP"
+    }
+  ]
 }
 </script>
 </head>

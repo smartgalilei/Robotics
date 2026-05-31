@@ -27,21 +27,36 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "HUMANOID RESEARCH",
-  "description": "大学・研究機関・先端開発チーム向けに最適化した小型人形ロボット。",
-  "brand": {
-    "@type": "Brand",
-    "name": "TANEGASIMA"
-  },
-  "category": "Research Humanoid Robot",
-  "url": "https://tanegasima.com/tanegasima-humanoid-research.html",
-  "image": "https://tanegasima.com/assets/tanegasima/generated/humanoid-research-v2.png",
-  "manufacturer": {
-    "@type": "Organization",
-    "name": "株式会社TANEGASIMA",
-    "url": "https://tanegasima.com/"
-  }
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://tanegasima.com/tanegasima-humanoid-research.html#webpage",
+      "url": "https://tanegasima.com/tanegasima-humanoid-research.html",
+      "name": "HUMANOID RESEARCH | TANEGASIMA",
+      "description": "大学・研究機関・先端開発チーム向けに最適化した小型人形ロボット。",
+      "inLanguage": "ja-JP",
+      "primaryImageOfPage": "https://tanegasima.com/assets/tanegasima/generated/humanoid-research-v2.png"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://tanegasima.com/tanegasima-humanoid-research.html#service",
+      "name": "HUMANOID RESEARCH",
+      "description": "大学・研究機関・先端開発チーム向けに最適化した小型人形ロボット。",
+      "serviceType": "Research humanoid robotics platform",
+      "url": "https://tanegasima.com/tanegasima-humanoid-research.html",
+      "image": "https://tanegasima.com/assets/tanegasima/generated/humanoid-research-v2.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "TANEGASIMA"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "株式会社TANEGASIMA",
+        "url": "https://tanegasima.com/"
+      },
+      "areaServed": "JP"
+    }
+  ]
 }
 </script>
 </head>

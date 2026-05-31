@@ -27,21 +27,36 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "QUADRUPED AGILE",
-  "description": "教育、研究、展示、開発者向けに最適化した小型四足ロボット。",
-  "brand": {
-    "@type": "Brand",
-    "name": "TANEGASIMA"
-  },
-  "category": "Agile Quadruped Robot",
-  "url": "https://tanegasima.com/tanegasima-quadruped-agile.html",
-  "image": "https://tanegasima.com/assets/tanegasima/generated/quadruped-agile-v2.png",
-  "manufacturer": {
-    "@type": "Organization",
-    "name": "株式会社TANEGASIMA",
-    "url": "https://tanegasima.com/"
-  }
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://tanegasima.com/tanegasima-quadruped-agile.html#webpage",
+      "url": "https://tanegasima.com/tanegasima-quadruped-agile.html",
+      "name": "QUADRUPED AGILE | TANEGASIMA",
+      "description": "教育、研究、展示、開発者向けに最適化した小型四足ロボット。",
+      "inLanguage": "ja-JP",
+      "primaryImageOfPage": "https://tanegasima.com/assets/tanegasima/generated/quadruped-agile-v2.png"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://tanegasima.com/tanegasima-quadruped-agile.html#service",
+      "name": "QUADRUPED AGILE",
+      "description": "教育、研究、展示、開発者向けに最適化した小型四足ロボット。",
+      "serviceType": "Agile quadruped robotics platform",
+      "url": "https://tanegasima.com/tanegasima-quadruped-agile.html",
+      "image": "https://tanegasima.com/assets/tanegasima/generated/quadruped-agile-v2.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "TANEGASIMA"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "株式会社TANEGASIMA",
+        "url": "https://tanegasima.com/"
+      },
+      "areaServed": "JP"
+    }
+  ]
 }
 </script>
 </head>

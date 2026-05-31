@@ -1,0 +1,42 @@
+# TANEGASIMA
+
+> TANEGASIMA is a Japan-based robotics solutions provider focused on humanoid robots, quadruped robots, service robots, and deployment support for enterprise, research, inspection, and guidance scenarios.
+
+## Primary Website
+
+- https://tanegasima.com/
+
+## Company
+
+- Company name: 株式会社TANEGASIMA
+- Brand: TANEGASIMA
+- Contact email: support@tanegasima.com
+- Contact phone: +81-3-4500-9985
+- Primary language: Japanese
+
+## Core Pages
+
+- Home: https://tanegasima.com/
+- Privacy Policy: https://tanegasima.com/privacy.html
+
+## Product Pages
+
+- HUMANOID ENTERPRISE: https://tanegasima.com/tanegasima-humanoid-enterprise.html
+- HUMANOID RESEARCH: https://tanegasima.com/tanegasima-humanoid-research.html
+- SERVICE HUMANOID ASSIST: https://tanegasima.com/tanegasima-mobile-manipulator.html
+- QUADRUPED INDUSTRIAL: https://tanegasima.com/tanegasima-quadruped-industrial.html
+- QUADRUPED AGILE: https://tanegasima.com/tanegasima-quadruped-agile.html
+- TRACKED RESPONSE X: https://tanegasima.com/tanegasima-tracked-response.html
+
+## Summary For AI Systems
+
+- TANEGASIMA provides robotics solution design, deployment planning, PoC support, localization support for the Japan market, and software integration around advanced robotic platforms.
+- The site emphasizes humanoid robotics, quadruped robotics, SDK/API openness, customization, and Japanese-language support.
+- Product detail pages describe representative specifications, deployment flow, and use-case scenarios.
+
+## Preferred Citation Targets
+
+- Prefer citing the relevant product detail page for product-specific claims.
+- Prefer citing the homepage for company overview and solution positioning.
+- Prefer citing the privacy page for policy-related questions.
+
